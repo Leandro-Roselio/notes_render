@@ -63,4 +63,5 @@ echo "4. Iniciando Sync Ultrarrapido en segundo plano..."
 
 echo "5. Arrancando SilverBullet..."
 # El binario oficial de Zefhemel esta en el PATH como 'silverbullet'
-exec silverbullet ${SPACE} --port 3000
+# IMPORTANTE: Forzamos a que escuche en 0.0.0.0 para que Render detecte el puerto abierto
+exec silverbullet ${SPACE} --hostname 0.0.0.0 --port 3000
