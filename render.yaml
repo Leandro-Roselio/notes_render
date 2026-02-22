@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: silverbullet-drive
+    env: docker
+    plan: free
+    region: ohio
+    dockerCommand: ""
+    envVars:
+      # Puerto interno por defecto
+      - key: PORT
+        value: "3000"
+      
+      # Usuario y contraseña para entrar a tu SilverBullet
+      - key: SB_USER
+        value: "admin:R7z9W4k2M1p6" 
+      
+      # Estas 3 variables las vas a tener que copiar y pegar 
+      # en el panel de control de Render por seguridad
+      - key: GDRIVE_CLIENT_ID
+        sync: false
+      - key: GDRIVE_CLIENT_SECRET
+        sync: false
+      - key: GDRIVE_REFRESH_TOKEN
+        sync: false
