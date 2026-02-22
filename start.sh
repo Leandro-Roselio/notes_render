@@ -45,12 +45,12 @@ scope = drive
 token = {"access_token":"${ACCESS_TOKEN}","token_type":"Bearer","refresh_token":"${GDRIVE_REFRESH_TOKEN}","expiry":"${FUTURE_DATE}"}
 EOF
 
-echo "3. Descargando notas de Google Drive al servidor..."
-# Descargamos todo para tener los archivos locales listos
-rclone copy gdrive: ${SPACE} --config ${RCLONE_CONF} --include "*.md" --update --verbose
-
-echo "4. Iniciando Sync Ultrarrapido en segundo plano..."
+echo "3. Iniciando Descarga inicial y Sync Ultrarrapido en segundo plano..."
 (
+  # Primero bajamos todo para tener los archivos locales listos (Descarga Inicial)
+  rclone copy gdrive: ${SPACE} --config ${RCLONE_CONF} --include "*.md" --update --verbose
+
+  # Luego empezamos el bucle infinito
   RCLONE_FLAGS="--fast-list --transfers 16 --checkers 16 --drive-chunk-size 32M --tpslimit 10 --update --quiet"
   while true; do
     # Bajar cambios
